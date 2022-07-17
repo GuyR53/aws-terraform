@@ -27,7 +27,7 @@ resource "aws_network_acl_rule" "public_in_ssh" {
   from_port         = 22
   to_port           = 22
   protocol          = "tcp"
-  cidr_block       = "0.0.0.0/0"
+  cidr_block       = "79.178.241.159/32"
 
   network_acl_id = aws_network_acl.public.id
   rule_action       = "allow"
