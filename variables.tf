@@ -7,12 +7,10 @@ variable "access_key" {
   description = "access key authentication"
 }
 
-variable "AWS_REGION" {
-  default = "ap-south-1"
-}
+
 variable "region" {
-  description = "us-east-1"
-  default = "us-east-1"
+  description = "us-west-2"
+  default = "us-west-2"
 }
 
 variable "environment" {
