@@ -6,7 +6,7 @@ resource "aws_instance" "app_server" {
   security_groups = [var.public_security_group]
   key_name = "id_rsa"
   # Last machine on the list doesn't have PublicIP
-  associate_public_ip_address = count.index != local.MachinewithIP
+  associate_public_ip_address = count.index == local.MachinewithIP
   tags = {
     Name = "${var.vm_names[count.index]}"
     Environment = var.environment
