@@ -21,29 +21,17 @@ resource "aws_network_acl_rule" "public_out" {
   rule_action       = "allow"
   rule_number       = 1
 }
-# Allow inbound port 22 to my computer
-resource "aws_network_acl_rule" "public_in_ssh" {
+# Allow all inbound, because Network Access Control Lists (NACLs) are stateless. This means that sending a request in one direction does not automatically permit a response in the other direction.
+resource "aws_network_acl_rule" "public_in" {
   egress         = false
-  from_port         = 22
-  to_port           = 22
-  protocol          = "tcp"
-  cidr_block       = "79.178.241.159/32"
+  from_port   = 0
+  to_port     = 0
+  protocol    = "-1"
+  cidr_block = "0.0.0.0/0"
 
   network_acl_id = aws_network_acl.public.id
   rule_action       = "allow"
-  rule_number       = 2
-}
-# Allow inbound port 8080
-resource "aws_network_acl_rule" "public_in_http" {
-  egress         = false
-  from_port         = 8080
-  to_port           = 8080
-  protocol          = "tcp"
-  cidr_block       = "0.0.0.0/0"
-
-  network_acl_id = aws_network_acl.public.id
-  rule_action       = "allow"
-  rule_number       = 3
+  rule_number       = 4
 }
 
 
@@ -71,16 +59,18 @@ resource "aws_network_acl_rule" "private_out" {
   rule_number       = 1
 }
 
-# Allow port 5432 inbound from vpc
+# Allow all inbound, because Network Access Control Lists (NACLs) are stateless. This means that sending a request in one direction does not automatically permit a response in the other direction.
 resource "aws_network_acl_rule" "private_in" {
   egress         = false
-  from_port         = 5432
-  to_port           = 5432
-  protocol          = "tcp"
-  cidr_block= aws_vpc.vpc.cidr_block
+  from_port   = 0
+  to_port     = 0
+  protocol    = "-1"
+  cidr_block = "0.0.0.0/0"
 
   network_acl_id = aws_network_acl.private.id
   rule_action       = "allow"
-  rule_number       = 2
+  rule_number       = 3
 }
+
+
 

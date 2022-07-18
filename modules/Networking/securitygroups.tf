@@ -62,10 +62,20 @@ resource "aws_security_group_rule" "private_out" {
   security_group_id = aws_security_group.private.id
 }
 
-resource "aws_security_group_rule" "private_in" {
+resource "aws_security_group_rule" "private_in_postgres" {
   type              = "ingress"
   from_port         = 5432
   to_port           = 5432
+  protocol          = "tcp"
+  cidr_blocks = [aws_subnet.PublicSubnet.cidr_block]
+
+  security_group_id = aws_security_group.private.id
+}
+
+resource "aws_security_group_rule" "private_in_ssh" {
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
   protocol          = "tcp"
   cidr_blocks = [aws_subnet.PublicSubnet.cidr_block]
 

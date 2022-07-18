@@ -37,4 +37,6 @@ module "DB" {
   private_security_group = module.Networking.private_security_group
   # Passing publickey for the machine
   public_key = var.public_key
+  public_security_group = module.Networking.public_security_group
+  public_subnet_id = module.Networking.public_subnet_id
 }

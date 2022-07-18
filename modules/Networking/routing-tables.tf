@@ -9,6 +9,7 @@ resource "aws_route_table" "publicroute" {
   }
 
 
+
    tags = {
     Name = "${var.environment}-PublicRoute"
     Environment = "${var.environment}"
@@ -27,7 +28,7 @@ resource "aws_route_table" "privateroute" {
 
    route {
      cidr_block = "0.0.0.0/0"
-     gateway_id = aws_nat_gateway.example.id
+     gateway_id = aws_nat_gateway.Natgateway.id
   }
    tags = {
     Name = "${var.environment}-PrivateRoute"
