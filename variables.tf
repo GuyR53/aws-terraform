@@ -39,3 +39,7 @@ variable "public_key" {
   description = "pubkey that we create for the machines"
 }
 
+variable "POSTGRES_PASSWORD" {
+  default = ""
+  description = "password for postgres db container on ecs"
+}

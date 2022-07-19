@@ -37,4 +37,6 @@ module "DB" {
   private_security_group = module.Networking.private_security_group
   # Passing publickey for the machine
   public_key = var.public_key
+  # Passing the POSTGRES password for ecs container
+  POSTGRES_PASSWORD = var.POSTGRES_PASSWORD
 }

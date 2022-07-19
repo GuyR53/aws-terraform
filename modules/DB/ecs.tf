@@ -14,9 +14,11 @@ resource "aws_ecs_service" "this" {
   desired_count   = 1
   launch_type = "FARGATE"
 
+
     network_configuration {
-    subnets = [var.private_subnet_id]
-    security_groups = [var.private_security_group]
+      assign_public_ip = true
+      subnets = [var.private_subnet_id]
+      security_groups = [var.private_security_group]
   }
 
 
@@ -26,7 +28,15 @@ resource "aws_ecs_service" "this" {
   }
 }
 
+# cloudwatch_log for ecs
+resource "aws_cloudwatch_log_group" "this" {
+  name = "this"
 
+   tags = {
+    Name = "${var.environment}-cloudwatch"
+    Environment = var.environment
+  }
+}
 #resource "aws_instance" "db_server" {
 #  ami           = "ami-0d70546e43a941d70"
 #  instance_type = "t2.micro"
