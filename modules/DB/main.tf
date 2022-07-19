@@ -12,6 +12,7 @@ resource "aws_ecs_service" "this" {
   cluster         = aws_ecs_cluster.this.arn
   task_definition = aws_ecs_task_definition.this.arn
   desired_count   = 1
+  launch_type = "FARGATE"
 
     network_configuration {
     subnets = [var.private_subnet_id]
@@ -26,17 +27,17 @@ resource "aws_ecs_service" "this" {
 }
 
 
-resource "aws_instance" "db_server" {
-  ami           = "ami-0d70546e43a941d70"
-  instance_type = "t2.micro"
-  subnet_id = var.private_subnet_id
-  security_groups = [var.private_security_group]
-  key_name = "id_rsa"
-  tags = {
-    Name = "${var.environment}-db-ec2"
-    Environment = var.environment
-  }
+#resource "aws_instance" "db_server" {
+#  ami           = "ami-0d70546e43a941d70"
+#  instance_type = "t2.micro"
+#  subnet_id = var.private_subnet_id
+#  security_groups = [var.private_security_group]
+#  key_name = "id_rsa"
+#  tags = {
+#    Name = "${var.environment}-db-ec2"
+#    Environment = var.environment
+#  }
 
 
 
-}
+
