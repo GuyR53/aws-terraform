@@ -16,7 +16,6 @@ resource "aws_ecs_service" "this" {
 
 
     network_configuration {
-      assign_public_ip = true
       subnets = [var.private_subnet_id]
       security_groups = [var.private_security_group]
   }
@@ -37,16 +36,7 @@ resource "aws_cloudwatch_log_group" "this" {
     Environment = var.environment
   }
 }
-#resource "aws_instance" "db_server" {
-#  ami           = "ami-0d70546e43a941d70"
-#  instance_type = "t2.micro"
-#  subnet_id = var.private_subnet_id
-#  security_groups = [var.private_security_group]
-#  key_name = "id_rsa"
-#  tags = {
-#    Name = "${var.environment}-db-ec2"
-#    Environment = var.environment
-#  }
+
 
 
 

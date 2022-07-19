@@ -3,8 +3,8 @@ resource "aws_ecs_task_definition" "this" {
   family                   = "test"
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
-  cpu                      = 4096
-  memory                   = 8192
+  cpu                      = 512
+  memory                   = 1024
   execution_role_arn       = "${data.aws_iam_role.ecs_task_execution_role.arn}"
   container_definitions    = <<TASK_DEFINITION
 [
@@ -12,9 +12,16 @@ resource "aws_ecs_task_definition" "this" {
     "name": "db",
     "image": "postgres:latest",
     "awslogs-create-group": "true",
-    "cpu": 4096,
-    "memory": 8192,
+    "cpu": 512,
+    "memory": 1024,
     "essential": true,
+    "environment": [
+                {
+                    "name": "POSTGRES_PASSWORD",
+                    "value": "${var.POSTGRES_PASSWORD}"
+
+                }
+            ],
     "networkMode": "awsvpc",
       "logConfiguration": {
                 "logDriver": "awslogs",
