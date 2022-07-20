@@ -10,7 +10,7 @@ resource "aws_security_group" "public" {
     Environment = var.environment
   }
 }
-
+# Allow all outbound
 resource "aws_security_group_rule" "public_out" {
   type        = "egress"
   from_port   = 0
@@ -20,7 +20,7 @@ resource "aws_security_group_rule" "public_out" {
 
   security_group_id = aws_security_group.public.id
 }
-
+# Allow my computer to ssh
 resource "aws_security_group_rule" "public_in_ssh" {
   type              = "ingress"
   from_port         = 22
@@ -29,7 +29,7 @@ resource "aws_security_group_rule" "public_in_ssh" {
   cidr_blocks       = ["79.178.241.159/32"]
   security_group_id = aws_security_group.public.id
 }
-
+# Allow all http to app
 resource "aws_security_group_rule" "public_in_http" {
   type              = "ingress"
   from_port         = 8080
@@ -51,7 +51,7 @@ resource "aws_security_group" "private" {
     Environment = var.environment
   }
 }
-
+# Allow all outbound
 resource "aws_security_group_rule" "private_out" {
   type        = "egress"
   from_port   = 0
@@ -61,7 +61,7 @@ resource "aws_security_group_rule" "private_out" {
 
   security_group_id = aws_security_group.private.id
 }
-
+# Allow 5432 for app machines to access the db
 resource "aws_security_group_rule" "private_in_postgres" {
   type              = "ingress"
   from_port         = 5432
@@ -71,7 +71,7 @@ resource "aws_security_group_rule" "private_in_postgres" {
 
   security_group_id = aws_security_group.private.id
 }
-
+# Allow ssh to app machines for debugging
 resource "aws_security_group_rule" "private_in_ssh" {
   type              = "ingress"
   from_port         = 22

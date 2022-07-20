@@ -1,14 +1,14 @@
 resource "aws_ecs_cluster" "this" {
-  name = "${var.environment}-ecs-cluster"
+  name = "${var.environment}-ecs-cluster-db"
 
   tags = {
-    Name = "${var.environment}-ecs-cluster"
+    Name = "${var.environment}-ecs-cluster-db"
     Environment = var.environment
   }
 }
 
 resource "aws_ecs_service" "this" {
-  name            = "${var.environment}-ecs-service"
+  name            = "${var.environment}-ecs-service-db"
   cluster         = aws_ecs_cluster.this.arn
   task_definition = aws_ecs_task_definition.this.arn
   desired_count   = 1
@@ -22,20 +22,12 @@ resource "aws_ecs_service" "this" {
 
 
     tags = {
-    Name = "${var.environment}-ecs-service"
+    Name = "${var.environment}-ecs-service-db"
     Environment = var.environment
   }
 }
 
-# cloudwatch_log for ecs
-resource "aws_cloudwatch_log_group" "this" {
-  name = "this"
 
-   tags = {
-    Name = "${var.environment}-cloudwatch"
-    Environment = var.environment
-  }
-}
 
 
 

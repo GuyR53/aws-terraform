@@ -42,9 +42,20 @@ resource "aws_ecs_task_definition" "this" {
 ]
 TASK_DEFINITION
 
-
 }
-# Execution role for fargate logs
+
+
+# cloudwatch_log for the task
+resource "aws_cloudwatch_log_group" "this" {
+  name = "this"
+
+   tags = {
+    Name = "${var.environment}-cloudwatch-db"
+    Environment = var.environment
+  }
+}
+
+# Execution role for task logs
 data "aws_iam_role" "ecs_task_execution_role" {
   name = "ecsTaskExecutionRole"
 }

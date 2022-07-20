@@ -3,15 +3,18 @@ variable "vm_names" {
   description = "List of machines to create with their names"
 }
 
+variable "public_subnet_id" {
+  description = "public subnet id"
+}
 
-variable "public_subnet_id" {}
+variable "public_key" {
+  description = "the public key for the machines"
+}
 
-variable "public_key" {}
+variable "public_security_group" {
+  description = "public security group id"
+}
 
-variable "public_security_group" {}
-
-variable "environment" {}
-# Getting the index of the configuration machine to make publicIPAddress
-locals {
-  MachinewithIP="${length(var.vm_names)-1}"
+variable "environment" {
+  description = "type of environment"
 }

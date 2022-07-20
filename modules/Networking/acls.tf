@@ -46,7 +46,7 @@ resource "aws_network_acl" "private" {
     Environment = var.environment
   }
 }
-# Allow outbound
+# Allow all outbound
 resource "aws_network_acl_rule" "private_out" {
   egress         = true
   from_port   = 0
