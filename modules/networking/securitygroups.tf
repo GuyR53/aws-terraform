@@ -67,7 +67,7 @@ resource "aws_security_group_rule" "private_in_postgres" {
   from_port         = 5432
   to_port           = 5432
   protocol          = "tcp"
-  cidr_blocks = [aws_subnet.PublicSubnet.cidr_block]
+  cidr_blocks = [aws_subnet.PublicSubnet_AZ1.cidr_block,aws_subnet.PublicSubnet_AZ2.cidr_block]
 
   security_group_id = aws_security_group.private.id
 }
@@ -77,7 +77,7 @@ resource "aws_security_group_rule" "private_in_ssh" {
   from_port         = 22
   to_port           = 22
   protocol          = "tcp"
-  cidr_blocks = [aws_subnet.PublicSubnet.cidr_block]
+  cidr_blocks = [aws_subnet.PublicSubnet_AZ1.cidr_block,aws_subnet.PublicSubnet_AZ2.cidr_block]
 
   security_group_id = aws_security_group.private.id
 }

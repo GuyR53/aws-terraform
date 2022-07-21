@@ -1,8 +1,18 @@
-variable "environment" {}
-variable "public_subnet_id" {}
-variable "public_security_group" {}
-# .env parameters:
+variable "environment" {
+  description = "enironment"
+}
+variable "public_subnet_id_az1" {
+  description = "public subnet az1"
+}
+variable "public_security_group" {
+  description = "public security group"
+}
+variable "ecs_target_group" {
+  description = "target group for lb"
+}
+variable "loadbalancer_dns" {}
 
+# .env parameters:
 variable "PORT" {
   description = "port"
 }

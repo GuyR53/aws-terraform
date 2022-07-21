@@ -1,4 +1,4 @@
-# Task to run the db by fargate
+# Task to run the app by fargate
 resource "aws_ecs_task_definition" "this" {
   family                   = "app"
   requires_compatibilities = ["FARGATE"]
@@ -44,7 +44,7 @@ resource "aws_ecs_task_definition" "this" {
                     "value": "${var.PGPORT}"
                 },{
                     "name": "HOST_URL",
-                    "value": "${var.HOST_URL}"
+                    "value": "http://${var.loadbalancer_dns}:8080"
                 },{
                     "name": "COOKIE_ENCRYPT_PWD",
                     "value": "${var.COOKIE_ENCRYPT_PWD}"

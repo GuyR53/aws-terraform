@@ -14,11 +14,11 @@ resource "aws_eip" "natip" {
   vpc      = true
 }
 
-# Nat gateway for public subnet
+# Nat gateway for public subnet az1
 resource "aws_nat_gateway" "Natgateway" {
   connectivity_type = "public"
   allocation_id = aws_eip.natip.id
-  subnet_id   = aws_subnet.PublicSubnet.id
+  subnet_id   = aws_subnet.PublicSubnet_AZ1.id
 
     tags = {
     Name = "${var.environment}-NatGateway"

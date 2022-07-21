@@ -1,4 +1,5 @@
-resource "aws_ecr_repository" "foo" {
+# ecr repository
+resource "aws_ecr_repository" "app" {
   name = "app"
 
     tags = {

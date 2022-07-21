@@ -1,7 +1,7 @@
 # Public ACL
 resource "aws_network_acl" "public" {
   vpc_id = aws_vpc.vpc.id
-  subnet_ids = [aws_subnet.PublicSubnet.id]
+  subnet_ids = [aws_subnet.PublicSubnet_AZ1.id,aws_subnet.PublicSubnet_AZ2.id]
   tags = {
     Name        = "${var.environment}-public-acl"
     Role        = "public"

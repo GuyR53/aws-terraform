@@ -1,3 +1,4 @@
+# ecs db cluster
 resource "aws_ecs_cluster" "this" {
   name = "${var.environment}-ecs-cluster-db"
 
@@ -7,6 +8,7 @@ resource "aws_ecs_cluster" "this" {
   }
 }
 
+# ecs db service
 resource "aws_ecs_service" "this" {
   name            = "${var.environment}-ecs-service-db"
   cluster         = aws_ecs_cluster.this.arn
